@@ -1,0 +1,10 @@
+camp01, https://www.nybooks.com/articles/2019/02/07/reeducating-xinjiangs-muslims/
+camp02, https://m.theepochtimes.com/new-witness-confirms-existence-of-chinese-concentration-camp_1415678.html
+camp03, https://uyghuramerican.org/article/dismal-conditions-push-uyghurs-escape-thai-facility.html
+camp04, https://www.news.com.au/world/asia/chinas-sickening-acts-on-female-prisoners-at-reeducation-camps/news-story/34d531c19a5bb060881a76ac8b478609
+camp05, https://supchina.com/2018/08/22/xinjiang-explainer-chinas-reeducation-camps-for-a-million-muslims/
+camp06, https://www.npr.org/sections/parallels/2014/03/28/295715854/made-in-china-but-was-it-made-in-a-prison
+camp07, https://www.bloomberg.com/news/articles/2019-04-19/how-china-is-defending-its-detention-of-muslims-to-the-world
+camp08, https://www.apnews.com/99016849cddb4b99a048b863b52c28cb
+camp09, https://www.apnews.com/99016849cddb4b99a048b863b52c28cb/gallery/media:2f27543be8594f97a62c0554adfdc3ff
+prison01, https://www.independent.co.uk/news/long_reads/china-prisons-christmas-decorations-supply-chain-forced-labour-torture-a8692776.html

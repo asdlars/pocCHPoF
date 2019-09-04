@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <h1>Chinese...factory or prison?</h1>
+
+    <div class="row">
+      <div class="container-fluid">
+        <div class="well">
+        </div>
+        <span class="score">
+
+        </span>
+        <span class="loading">loading</span>
+        <div class="buttons">
+          <button class="btns" type="button" answer="camp" name="button">PRISON</button>
+          <button class="btns" type="button" answer="factory" name="button">FACTORY</button>
+        </div>
+        <div class="src">
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+      let answer = "nada";
+      let score = 0;
+      let questions = 0;
+      const datos = {
+        "factory" : {
+          "tryvbunj.jpg" : "https://stockinfo.us/2018/12/06/cnbc-nightmare-conditions-at-chinese-factories-where-hasbro-and-disney-toys-are-made/",
+          "t9g7itubh.jpg" : "https://www.gsb.stanford.edu/insights/how-improve-working-conditions-developing-world",
+          "u89hjnasdd.jpg" : "https://www.scmp.com/news/china/society/article/2187501/chinese-factories-struggle-find-staff-migrant-workers-look",
+        },
+        "camp": {
+          "57dr6fytubh.jpg" : "https://www.nybooks.com/articles/2019/02/07/reeducating-xinjiangs-muslims/",
+          "vcbvhj78k.jpg" : "https://m.theepochtimes.com/new-witness-confirms-existence-of-chinese-concentration-camp_1415678.html",
+          "lmnciayeghr.jpg" : "https://supchina.com/2018/08/22/xinjiang-explainer-chinas-reeducation-camps-for-a-million-muslims/",
+          "inucyhmdnf.jpg" : "https://www.npr.org/sections/parallels/2014/03/28/295715854/made-in-china-but-was-it-made-in-a-prison",
+          "evcbtrvynbguhni.jpg" : "https://www.bloomberg.com/news/articles/2019-04-19/how-china-is-defending-its-detention-of-muslims-to-the-world",
+          "h9uo3n5sdgsf.jpg" : "https://www.apnews.com/99016849cddb4b99a048b863b52c28cb",
+          "e5cr6vt7by8n.jpg" : "https://www.apnews.com/99016849cddb4b99a048b863b52c28cb/gallery/media:2f27543be8594f97a62c0554adfdc3ff",
+        }
+      };
+
+
+      // Returns a Promise that resolves after "ms" Milliseconds
+      function timer(ms) {
+       return new Promise(res => setTimeout(res, ms));
+      }
+
+      async function cargando(status) {
+        steps = ["-","\\","|","/"];
+        count = 3;
+        step = 0
+        if (status) {
+          $(".loading").show()
+          while (true) {
+            $(".loading").text(steps[step]);
+            step++;
+            if (step >= 4) {
+              step = 0;
+            }
+            await timer(500)
+          }
+        } else {
+          $(".loading").hide()
+        }
+      }
+
+      function coinFlip() {
+        coin = Math.floor(Math.random(1)*2);
+        res = coin === 1 ? "camp" : "factory";
+        return res;
+      }
+
+      function selectImg(ob) {
+        max = Object.keys(ob).length;
+        roll = Math.floor(Math.random(1)*max);
+        return roll;
+      }
+
+      function getImage() {
+        coin = coinFlip();
+        die = selectImg(datos[coin])
+        img = Object.keys(datos[coin])[die];
+        src = Object.values(datos[coin])[die];
+        res = {"img": img, "src": src, "coin": coin};
+        return res;
+      }
+
+      function printImage () {
+        data = getImage();
+        answer = coin;
+        desc = '<a target="_blank" href="'+data.src+'">'+coin+'</a>'
+        image = '<img src="img/'+data.img+'">';
+        $(".well").append(image);
+        $(".src").append(desc);
+      }
+
+      function clearImage() {
+        $(".well img").remove();
+        $(".src > a").remove();
+        $(".src").hide();
+      }
+
+      function newImage() {
+        $(".btns").prop("disabled", false);
+        clearImage();
+        printImage();
+        cargando(false)
+      }
+
+      function correct() {
+        console.log("YAY!");
+        $(".src").show();
+        score++;
+        questions++;
+        $(".score").text(score+"/"+questions);
+      }
+      function wrong() {
+        console.log("Oh noes!");
+        $(".src").show();
+        questions++;
+        $(".score").text(score+"/"+questions);
+      }
+
+      $( ".btns" ).on( "click", function() {
+        $(".btns").prop("disabled", true);
+        $(this).attr("answer") == answer ? correct() : wrong();
+        console.log("loading new image...");
+        cargando(true);
+        setTimeout(newImage, 3000)
+      });
+
+      $(".score").text(score+"/"+questions);
+      newImage();
+
+    </script>
+    <style media="screen">
+      .src {
+        display: none;
+      }
+      .well {
+        float: left;
+        margin-right: 2em;
+      }
+    </style>
+  </body>
+</html>
